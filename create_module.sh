@@ -26,7 +26,6 @@ echo -e " - create '$source_dir'"
 mkdir -p "$source_dir" || exit 1
 echo -e " - create 'activate_venv.sh'"
 cp -n "$skeleton_dir/activate_venv.sh" "$module_dir/"
-sed -i "s/MODULENAME/$module_name/" "$module_dir/activate_venv.sh"
 echo -e " - create 'run.sh'"
 cp -n "$skeleton_dir/run.sh" "$module_dir/"
 echo -e " - create 'note.md'"
