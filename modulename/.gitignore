@@ -1,0 +1,14 @@
+# Python
+__pycache__
+/dist
+/build
+*.egg-info
+.eggs
+
+# Vim
+*.sw[op]
+Session.vim
+tags
+
+# Misc
+note.md
