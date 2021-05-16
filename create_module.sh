@@ -24,8 +24,6 @@ echo -e "creating basic structure"
 
 echo -e " - create '$source_dir'"
 mkdir -p "$source_dir" || exit 1
-echo -e " - create 'activate_venv.sh'"
-cp -n "$skeleton_dir/activate_venv.sh" "$module_dir/"
 echo -e " - create 'run.sh'"
 cp -n "$skeleton_dir/run.sh" "$module_dir/"
 echo -e " - create 'note.md'"
@@ -57,3 +55,8 @@ python3 -m venv "$module_dir/venv/"
 
 echo -e "initialising git"
 cd "$module_dir" && git init
+
+echo -e "next steps:"
+echo -e " - edit README.md and setup.cfg"
+echo -e " - activate venv by calling 'source venv/bin/activate' (add to your .bashrc?)"
+echo -e " - connect to a remote git repository (switch to master if on GitHub)"
