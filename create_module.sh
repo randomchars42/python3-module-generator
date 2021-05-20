@@ -1,62 +1,64 @@
 #!/usr/bin/env bash
 
-module_name=$1
-while [[ -z "$module_name" ]]
+package_name=$1
+while [[ -z "$package_name" ]]
 do
-  read -p "Please provide a module name (1 word, lower-case): " module_name
+  read -p "Please provide a package name (1 word, lower-case): " package_name
 done
 
 base_dir=$2
 while [[ -z "$base_dir" ]]
 do
-  read -p "Please provide a path where the module should be created: " base_dir
+  read -p "Please provide a path where the package should be created (like /home/johndoe/Code): " base_dir
 done
 
-module_dir="$base_dir/$module_name"
-source_dir=$module_dir/src/$module_name
+package_dir="$base_dir/$package_name"
+source_dir="$package_dir/src/$package_name"
 
 # approach taken from:
 # https://codefather.tech/blog/bash-get-script-directory/
 script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-skeleton_dir="$script_dir/modulename"
+skeleton_dir="$script_dir/packagename"
 
 echo -e "creating basic structure"
 
 echo -e " - create '$source_dir'"
 mkdir -p "$source_dir" || exit 1
 echo -e " - create 'run.sh'"
-cp -n "$skeleton_dir/run.sh" "$module_dir/"
+cp -n "$skeleton_dir/run.sh" "$package_dir/"
 echo -e " - create 'note.md'"
-cp -n "$skeleton_dir/note.md" "$module_dir/"
+cp -n "$skeleton_dir/note.md" "$package_dir/"
 echo -e " - create 'LICENSE' (Unlicense!)"
-cp -n "$skeleton_dir/LICENSE" "$module_dir/"
+cp -n "$skeleton_dir/LICENSE" "$package_dir/"
 echo -e " - create 'README.md'"
-cp -n "$skeleton_dir/README.md" "$module_dir/"
-sed -i "s/MODULENAME/$module_name/" "$module_dir/README.md"
+cp -n "$skeleton_dir/README.md" "$package_dir/"
+sed -i "s/\$PACKAGENAME/$package_name/" "$package_dir/README.md"
 echo -e " - create 'pyproject.toml'"
-cp -n "$skeleton_dir/pyproject.toml" "$module_dir/"
+cp -n "$skeleton_dir/pyproject.toml" "$package_dir/"
 echo -e " - create 'setup.cfg'"
-cp -n "$skeleton_dir/setup.cfg" "$module_dir/"
-sed -i "s/MODULENAME/$module_name/" "$module_dir/setup.cfg"
+cp -n "$skeleton_dir/setup.cfg" "$package_dir/"
+sed -i "s/\$PACKAGENAME/$package_name/" "$package_dir/setup.cfg"
 echo -e " - create 'setup.py'"
-cp -n "$skeleton_dir/setup.py" "$module_dir/"
+cp -n "$skeleton_dir/setup.py" "$package_dir/"
 echo -e " - create '.gitignore'"
-cp -n "$skeleton_dir/.gitignore" "$module_dir/"
-echo -e " - create main module file"
-cp -n "$skeleton_dir/src/modulename/modulename.py" "$source_dir/$module_name.py"
+cp -n "$skeleton_dir/.gitignore" "$package_dir/"
+echo -e " - create main package file"
+cp -n "$skeleton_dir/src/packagename/packagename.py" "$source_dir/$package_name.py"
 touch "$source_dir/__init__.py"
 echo -e " - create 'log' submodule"
 mkdir -p "$source_dir/log"
 touch "$source_dir/log/__init__.py"
-cp -n "$skeleton_dir/src/modulename/log/log.py" "$source_dir/log/"
+cp -n "$skeleton_dir/src/packagename/log/log.py" "$source_dir/log/"
 
 echo -e "initialising python venv"
-python3 -m venv "$module_dir/venv/"
+python3 -m venv "$package_dir/venv/"
 
 echo -e "initialising git"
-cd "$module_dir" && git init
+cd "$package_dir" && git init
 
-echo -e "next steps:"
+echo -e "Next steps:"
 echo -e " - edit README.md and setup.cfg"
 echo -e " - activate venv by calling 'source venv/bin/activate' (add to your .bashrc?)"
-echo -e " - connect to a remote git repository (switch to master if on GitHub)"
+echo -e " - connect to a remote git repository (switch to branch main if on GitHub)"
+echo -e " - check if the license (TH UNLICENSE) suits your needs and intentions"
+read -p "Press any key to continue ..." anykey
