@@ -1,6 +1,6 @@
 ## tl;dr;
 
-`create_module.sh /path/to/your/package`
+`create_package.sh /path/to/your/package`
 
 ## About
 
