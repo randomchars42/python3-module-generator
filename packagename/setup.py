@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
 from setuptools import setup, find_packages
+import pathlib
+
+path = pathlib.Path(__file__).parent.resolve()
 
 setup(
     name='$PACKAGENAME',
     description='',
-    long_description=['README.md', 'LICENSE'],
+    long_description = (path / 'README.md').read_text(encoding='utf-8'),
     author='',
     author_email='',
     license='The Unlicense',
@@ -15,7 +18,12 @@ setup(
         'Programming Language :: Python :: 3'
         'Programming Language :: Python :: 3.6'
     ],
-    packages=find_packages(include=['$PACKAGENAME', '$PACKAGENAME.*']),
+    package_dir={'': 'src'},
+    packages=find_packages(where='src'),
+    package_data={  # Optional
+        '$PACKAGENAME': ['FILE'],
+    }
+    python_requires='>=3.6, < 4',
     setup_requires=[
         'docutils>=0.3',
         'wheel',
