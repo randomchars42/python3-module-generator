@@ -13,6 +13,14 @@ setup(
     author_email='',
     license='The Unlicense',
     url='',
+    project_urls={
+        'Documentation': '',
+        'Funding': '',
+        'Say Thanks!': '',
+        'Source': '',
+        'Tracker': '',
+    },
+    keywords='',
     classifiers=[
         'License::Public Domain'
         'Programming Language :: Python :: 3'
