@@ -10,6 +10,3 @@ __pycache__
 *.sw[op]
 Session.vim
 tags
-
-# Misc
-note.md

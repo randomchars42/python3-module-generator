@@ -60,17 +60,12 @@ setup(
     setup_requires=[
         'docutils>=0.3',
         'wheel',
-        'setuptools_scm',
+        'setuptools',
     ],
     install_requires=[
         ''
     ],
     entry_points={
         'console_scripts':['main=$PACKAGENAME.$PACKAGENAME:main']
-    },
-    use_scm_version={
-        'root': '.',
-        'relative_to': __file__,
-        'local_scheme': 'node-and-timestamp'
     }
 )
